@@ -1,0 +1,22 @@
+h1 {
+    color: white;
+    /* background-color: blue; */
+}
+
+textarea {
+    background: transparent;
+    border: 1px solid black;
+    resize: none;
+    color: #000000;
+    border-left: 1px solid black;
+    padding: 10px;
+  }
+
+  .row {
+    border-top: 1px solid white;
+  }
+
+  #searchBtn i:hover {
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+  }
