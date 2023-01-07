@@ -24,13 +24,24 @@ $(function () {
         $("#humidity").text("Humidity: " + humidityToSet + "%");
     }
 
-    function setForecastWeather(params) {
-        
+    
+    function setForecastWeather(forecastData) {
+        var forecastContainersEl = $("#forecast-containers");
+        var length = forecastData.length
+        for (i = 0; i < length; i+ 8) {
+            var containerEl = $("<div>");
+            var dateEl = forecastData
+            var iconEl = 
+            var tempEl;
+            var windEl;
+            var humidityEl;
+
+        }
     }
 
     function getWeatherResponses(geoData) {
         currentWeatherAPIURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey + "&units=imperial";
-        fiveDaysForecastAPIURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey + "&units=imperial";
+        fiveDaysForecastAPIURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial"`;
         console.log(currentWeatherAPIURL);
         console.log(fiveDaysForecastAPIURL);
         fetch(currentWeatherAPIURL)
