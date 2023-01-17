@@ -8,14 +8,14 @@ $(function () {
     var APIkey = "e897220616a2bdbf3302fa08f46b932e";
     var formEl = $("#city-form");
     var searches = [];
+    let searchHistoryEl = $("#city-search-history");
 
     // localStorage Functions
 
     const setCitiestoHistory = () => {
-        let searchHistoryEl = $("#city-search-history");
         searchHistoryEl.empty();
         searches.forEach(search => {
-            let citySearchedEl = $("<button>").html(search);
+            let citySearchedEl = $("<button>").html(search).addClass("btn btn-secondary p-2 m-2");
             searchHistoryEl.prepend(citySearchedEl);
         });
     };
@@ -32,8 +32,8 @@ $(function () {
     }
     
 
-    const setSearchToStorage = () => {
-        let searchToSet = formEl.children("#city-input").val();
+    const setSearchToStorage = (cityPassed) => {
+        let searchToSet = cityPassed;
         if (searches.includes(searchToSet)) {
             return;
         } else if (searches.length == 10) {
@@ -103,7 +103,7 @@ $(function () {
     
     }
 
-    function getWeatherResponses(geoData) {
+    function getWeatherResponses() {
         let currentWeatherAPIURL = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
         let fiveDaysForecastAPIURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
         console.log(currentWeatherAPIURL);
@@ -134,9 +134,8 @@ $(function () {
             })
     }
 
-    function getCityCoordinates() {
+    function getCityCoordinates(cityRequested) {
         // Will store value retrived from Search a City form
-        var cityRequested = formEl.children("#city-input").val();
 
         // Query string to find 
         var geocodingURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityRequested}&limit=1&appid=${APIkey}`;
@@ -153,6 +152,7 @@ $(function () {
                 lat = data[0].lat;
                 console.log(data[0].lon);
                 lon = data[0].lon;
+                setSearchToStorage(cityRequested);
                 getWeatherResponses();
             })
 
@@ -162,13 +162,21 @@ $(function () {
         getSearchFromStorage();
     }
 
-    const searchInit = (e) => {
-        e.preventDefault()
-        setSearchToStorage();
-        getCityCoordinates();
-    };
+    // Query GeoCode and Weather API based on value inputed on search bar
+    formEl.on('submit', (e) => {
+        e.preventDefault();
+        console.log(e);
+        let city = formEl.children("#city-input").val();
+        getCityCoordinates(city);
+    })
 
-    formEl.on('submit', searchInit)
+    // Query GeoCode and Weather API based on clicked button from history search
+    searchHistoryEl.click((e) => {
+        e.preventDefault();
+        let city = e.target.textContent;
+        console.log(city);
+        getCityCoordinates(city);
+    })
 
     init();
 

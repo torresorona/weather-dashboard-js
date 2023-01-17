@@ -23,19 +23,19 @@
     </header>
 
     <div class="container p-0 justify-content-center mt-3">
-        <div class="row">
-            <div id="cities" class="col-4">
+        <div class="d-flex flex-column flex-md-row">
+            <div id="cities" class="col-lg-4 flex-column m-4 col-md-12">
                 <form class="d-flex row pb-2 border-3 border-bottom" id="city-form">
                     <h2>Search for a City:</h2>
                     <input id="city-input" rows="1" class="rounded mb-2"></input>
                     <button class="btn-primary rounded">Search</button>
                 </form>
-                <div>
+                <div class=".d-sm-none .d-sm-flex">
                     <ul id="city-search-history" class="d-flex flex-column"></ul>
                 </div>
             </div>
     
-            <div id="forecast-display" class="col-8">
+            <div id="forecast-display" class="col-lg-8  col-md-12 flex-column m-4">
                 <div id="today-weather" class="border mh d-flex flex-column p-3 mb-3 align-content-left align-middle">
                     <h4 id="city"> </h4>
                     <h5 id="temp"> </h5>
@@ -44,7 +44,7 @@
                 </div>
                 <div id="5-day-forecast">
                     <h3>5-day Forecast:</h3>
-                    <div class="forecasts-containers d-flex flex-row justify-content-around"></div>
+                    <div class="forecasts-containers d-flex flex-column flex-md-row justify-content-around"></div>
                 </div>
             </div>
         </div>
