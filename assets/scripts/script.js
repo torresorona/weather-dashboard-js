@@ -90,7 +90,7 @@ $(function () {
             var dateEL = $("<h5>").html(dateToSet);
             // Use OpenWeatherAPI icons based on icon code from response
             var iconCode = forecastData.list[listIndex].weather[0].icon
-            var iconEL = $("<img>").attr("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
+            var iconEL = $("<img>").attr("src", `https://openweathermap.org/img/wn/${iconCode}@2x.png`);
             var tempEl = $("<h6>").html(`Temp: ${forecastData.list[listIndex].main.temp}°F`);
             var windEl = $("<h6>").html(`Wind: ${forecastData.list[listIndex].wind.speed} MPH`);
             var humidityEl = $("<h6>").html(`Humdity: ${forecastData.list[listIndex].main.humidity}%`);
@@ -104,8 +104,8 @@ $(function () {
     }
 
     function getWeatherResponses() {
-        let currentWeatherAPIURL = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
-        let fiveDaysForecastAPIURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
+        let currentWeatherAPIURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
+        let fiveDaysForecastAPIURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}&units=imperial`;
         console.log(currentWeatherAPIURL);
         console.log(fiveDaysForecastAPIURL);
         fetch(currentWeatherAPIURL)
@@ -138,7 +138,7 @@ $(function () {
         // Will store value retrived from Search a City form
 
         // Query string to find 
-        var geocodingURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityRequested}&limit=1&appid=${APIkey}`;
+        var geocodingURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityRequested}&limit=1&appid=${APIkey}`;
 
         fetch(geocodingURL)
             .then(function (response) {
